@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
     @title = "Posts"
-    @posts = Post.all
+    @posts = Post.where(created_at: 1.hour.ago...now)
   end
   
   def new
@@ -60,5 +60,20 @@ class PostsController < ApplicationController
       render :index
     end
   end
+  def vote_down
+    @post = Post.find_by_id(params[:id])
+    @user = @post.user
+    @user.score = @user.score - 1
+    if @user.save
+      flash[:success] = "Score DOWNgraded"
+      @posts = Post.all
+      render :index
+    else
+      flash[:danger] = "Something went wrong"
+      @posts = Post.all
+      render :index
+    end
+  end
+
 
 end

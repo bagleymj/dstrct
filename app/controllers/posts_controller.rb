@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
     @title = "Posts"
-    @posts = Post.all
+    @posts = Post.where(created_at: 1.hour.ago...Time.now)
   end
   
   def new
