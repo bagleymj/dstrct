@@ -6,11 +6,13 @@ class PostsController < ApplicationController
   
   def new
     @title = "Write new post"
-    @post = Post.new
+    user = current_user
+    @post = user.posts.new
   end
   
   def create
-    @post = Post.new(post_params)
+    user = current_user
+    @post =user.posts.new(post_params)
     if @post.save
       flash[:success] = "Post submitted"
       redirect_to posts_path
