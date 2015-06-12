@@ -1,7 +1,14 @@
 class PostsController < ApplicationController
   def index
     @title = "Posts"
-    @posts = Post.where(created_at: 1.hour.ago...Time.now)
+    users = User.all
+    @posts = []
+    users.each do |user|
+      user.posts.each do |post|
+        @posts << post
+      end
+    end
+    @posts.where(created_at: 1.hour.ago...Time.now).order('created_at desc').last
   end
   
   def new

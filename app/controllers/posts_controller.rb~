@@ -1,7 +1,14 @@
 class PostsController < ApplicationController
   def index
     @title = "Posts"
-    @posts = Post.where(created_at: 1.hour.ago...Time.now)
+    users = User.all
+    @posts = []
+    users.each do |user|
+      user.posts.each do |post|
+        @posts << post
+      end
+    end
+    @posts = users.post.where(created_at: 1.hour.ago...Time.now).order('created_at desc').last
   end
   
   def new
@@ -52,11 +59,9 @@ class PostsController < ApplicationController
     @user.score = @user.score + 1
     if @user.save
       flash[:success] = "Score UPdated"
-      #@posts = Post.all
       redirect_to posts_path
     else
       flash[:danger] = "Something went wrong"
-      #@posts = Post.all
       redirect_to posts_path
     end
   end
