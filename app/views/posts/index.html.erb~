@@ -1,8 +1,12 @@
 <% @posts.each do |post| %>
   <div>
     <h2><%= post.title %></h2>
-    <h4><%= post.user.username %> | <%= link_to "-", "#" %>(<%= post.user.score %>)<%= link_to "+", vote_up_path(post.id), method: :put %></h4>
-    <%= params[:id] %>
+    <h4>
+      <%= post.user.username %> | 
+      <%= link_to "-", vote_down_path(post.id), method: :put %>
+      (<%= post.user.score %>)
+      <%= link_to "+", vote_up_path(post.id), method: :put %>
+    </h4>
     <p><%= post.content %></p>
   </div>
 <% end %>

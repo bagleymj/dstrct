@@ -52,12 +52,10 @@ class PostsController < ApplicationController
     @user.score = @user.score + 1
     if @user.save
       flash[:success] = "Score UPdated"
-      @posts = Post.all
-      render :index
+      redirect_to posts_path
     else
       flash[:danger] = "Something went wrong"
-      @posts = Post.all
-      render :index
+      redirect_to posts_path
     end
   end
   def vote_down
