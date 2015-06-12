@@ -46,4 +46,34 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :content)
   end
 
+  def vote_up
+    @post = Post.find_by_id(params[:id])
+    @user = @post.user
+    @user.score = @user.score + 1
+    if @user.save
+      flash[:success] = "Score UPdated"
+      @posts = Post.all
+      render :index
+    else
+      flash[:danger] = "Something went wrong"
+      @posts = Post.all
+      render :index
+    end
+  end
+  def vote_down
+    @post = Post.find_by_id(params[:id])
+    @user = @post.user
+    @user.score = @user.score - 1
+    if @user.save
+      flash[:success] = "Score DOWNgraded"
+      @posts = Post.all
+      render :index
+    else
+      flash[:danger] = "Something went wrong"
+      @posts = Post.all
+      render :index
+    end
+  end
+
+
 end

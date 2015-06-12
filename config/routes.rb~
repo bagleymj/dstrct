@@ -19,7 +19,9 @@ Rails.application.routes.draw do
 
      get 'login' => 'sessions#new'
      post 'login' => 'sessions#create'
-     delete 'login' => 'sessions#destroy'
+     delete 'logout' => 'sessions#destroy'
+
+     put 'posts/:id/vote_up' => 'posts#vote_up', :as => 'vote_up'
 
   # Example resource route with options:
   #   resources :products do

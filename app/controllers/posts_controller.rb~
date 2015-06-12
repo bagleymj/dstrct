@@ -7,12 +7,12 @@ class PostsController < ApplicationController
   def new
     @title = "Write new post"
     user = current_user
-    @post = user.post.new
+    @post = user.posts.new
   end
   
   def create
     user = current_user
-    @post =user.post.new(post_params)
+    @post =user.posts.new(post_params)
     if @post.save
       flash[:success] = "Post submitted"
       redirect_to posts_path
@@ -44,6 +44,21 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :content)
+  end
+
+  def vote_up
+    @post = Post.find_by_id(params[:id])
+    @user = @post.user
+    @user.score = @user.score + 1
+    if @user.save
+      flash[:success] = "Score UPdated"
+      @posts = Post.all
+      render :index
+    else
+      flash[:danger] = "Something went wrong"
+      @posts = Post.all
+      render :index
+    end
   end
 
 end

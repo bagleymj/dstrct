@@ -7,8 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <table>
+    <% flash.each do |key, value| %>
+    <tr>
+      <td>
+        <%= key %>
+      </td>
+      <td>
+        <%= value %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
   <% if logged_in? %>
-    <p>Welcome <%= current_user.username %>|<%= link_to "Log Out", logout_path %></p>
+    <p>Welcome <%= current_user.username %>|<%= link_to "Log Out", logout_path, method: :delete %></p>
   <% else %>
     <%= link_to "Login", login_path %>
   <% end %>

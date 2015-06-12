@@ -21,6 +21,9 @@ Rails.application.routes.draw do
      post 'login' => 'sessions#create'
      delete 'logout' => 'sessions#destroy'
 
+     put 'posts/:id/vote_up' => 'posts#vote_up', :as => 'vote_up'
+     put 'posts/:id/vote_down' => 'posts#vote_down', :as => 'vote_down'
+
   # Example resource route with options:
   #   resources :products do
   #     member do
