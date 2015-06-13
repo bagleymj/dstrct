@@ -8,7 +8,7 @@ class PostsController < ApplicationController
         @posts << post
       end
     end
-    @posts = users.post.where(created_at: 1.hour.ago...Time.now).order('created_at desc').last
+    @posts.where(created_at: 1.hour.ago...Time.now).order('created_at desc').last
   end
   
   def new

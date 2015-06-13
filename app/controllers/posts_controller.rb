@@ -4,11 +4,8 @@ class PostsController < ApplicationController
     users = User.all
     @posts = []
     users.each do |user|
-      user.posts.each do |post|
-        @posts << post
-      end
+      @posts << user.posts.last
     end
-    @posts.where(created_at: 1.hour.ago...Time.now).order('created_at desc').last
   end
   
   def new
