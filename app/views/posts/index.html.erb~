@@ -4,14 +4,10 @@
   <% if column == 1 %>
     <div>
   <% end %>
-  <% if column == 5 %>
-    <div class="lastpost">
-  <% else %>
-    <div class="post">
-  <% end %>
+  <div class="post">
     <h2><%= post.title %></h2>
     <h4>
-      <%= post.user.username %> | 
+      <%= link_to post.user.username, post_path(post.user.id) %> | 
       <%= link_to "-", vote_down_path(post.id), method: :put %>
       (<%= post.user.score %>)
       <%= link_to "+", vote_up_path(post.id), method: :put %>
