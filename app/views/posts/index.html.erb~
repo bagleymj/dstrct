@@ -7,10 +7,10 @@
   <div class="post">
     <h2><%= post.title %></h2>
     <h4>
-      <%= link_to post.user.username, post_path(post.user.id) %> | 
-      <%= link_to "-", vote_down_path(post.id), method: :put %>
+      <%= link_to post.user.username, user_path(post.user.id) %> | 
+      <%= link_to "-", vote_down_path(post.id), method: :put if post.user != current_user %>
       (<%= post.user.score %>)
-      <%= link_to "+", vote_up_path(post.id), method: :put %>
+      <%= link_to "+", vote_up_path(post.id), method: :put if post.user != current_user %>
     </h4>
     <h5><%= time_ago_in_words(post.created_at) %> ago</h5>
     <p><%= post.content %></p>

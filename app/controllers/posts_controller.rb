@@ -51,14 +51,15 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :score)
   end
 
   def vote_up
     @post = Post.find_by_id(params[:id])
     @user = @post.user
-    @user.score = @user.score + 1
-    if @user.save
+    @user.score += 1
+    @post.score += 1
+    if @user.save && @post.save
       flash[:success] = "Score UPdated"
       redirect_to posts_path
     else
@@ -69,15 +70,14 @@ class PostsController < ApplicationController
   def vote_down
     @post = Post.find_by_id(params[:id])
     @user = @post.user
-    @user.score = @user.score - 1
-    if @user.save
+    @post.score += -1
+    @user.score += -1
+    if @user.save && @post.save
       flash[:success] = "Score DOWNgraded"
-      @posts = Post.all
-      render :index
+      redirect_to posts_path
     else
       flash[:danger] = "Something went wrong"
-      @posts = Post.all
-      render :index
+      redirect_to posts_path
     end
   end
 
