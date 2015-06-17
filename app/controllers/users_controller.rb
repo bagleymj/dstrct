@@ -4,6 +4,9 @@ class UsersController < ApplicationController
     @users = User.all
   end
   def new
+    if logged_in?
+      redirect_to posts_path
+    end
     @title = "Sign up!"
     @user = User.new
   end
@@ -12,7 +15,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "User successfully saved!"
-      redirect_to users_path
+      log_in(@user)
+      redirect_to posts_path
     else
       @title = "Sign up!"
       render :new
