@@ -2,10 +2,13 @@ class PostsController < ApplicationController
   def index
     @title = "Posts"
     users = User.all
-    @posts = []
+    posts = []
     users.each do |user|
-      @posts << user.posts.last
+      if !user.posts.empty?
+        posts << user.posts.last
+      end
     end
+    @posts = posts.sort_by {|post| post[:created_at] }.reverse
   end
   
   def new
