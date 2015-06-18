@@ -1,0 +1,5 @@
+class AddDestructAtToPosts < ActiveRecord::Migration
+  def change
+    add_column :posts, :destruct_at, :timestamp, null: false, default: Time.at(0)
+  end
+end

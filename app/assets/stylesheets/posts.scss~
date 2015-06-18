@@ -1,0 +1,21 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.post {
+  display:block;
+  //float:left;
+  width:15%;
+  margin:5px;
+  padding:5px;
+  background-color:white;
+  color:#353535;
+  vertical-align:top;
+}
+.lastpost {
+  display:inline-block;
+  width:15%;
+  margin:5px;
+  padding:5px;
+  background-color:white;
+  color:#353535;
+}

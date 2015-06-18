@@ -20,6 +20,7 @@ class PostsController < ApplicationController
   def create
     user = current_user
     @post =user.posts.new(post_params)
+    @post.destruct_at = @post.lifespan.seconds.from_now
     if @post.save
       flash[:success] = "Post submitted"
       user.post_count = user.post_count + 1
@@ -51,7 +52,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :score)
+    params.require(:post).permit(:title, :content, :score, :lifespan)
   end
 
   def vote_up

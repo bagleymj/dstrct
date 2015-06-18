@@ -1,0 +1,4 @@
+class AddScoreToUser < ActiveRecord::Migration
+  def change
+  end
+end

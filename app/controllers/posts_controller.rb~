@@ -20,6 +20,7 @@ class PostsController < ApplicationController
   def create
     user = current_user
     @post =user.posts.new(post_params)
+    @post.destruct_at = @post.lifespan.seconds.from_now
     if @post.save
       flash[:success] = "Post submitted"
       user.post_count = user.post_count + 1
@@ -72,7 +73,7 @@ class PostsController < ApplicationController
     @user = @post.user
     @post.score += -1
     @user.score += -1
-    if @user.save
+    if @user.save && @post.save
       flash[:success] = "Score DOWNgraded"
       redirect_to posts_path
     else
