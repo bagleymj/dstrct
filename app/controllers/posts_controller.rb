@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   def index
+    user = current_user
+    @post = user.posts.new
     @title = "Posts"
     users = User.all
     posts = []
@@ -12,11 +14,11 @@ class PostsController < ApplicationController
     @posts = posts.sort_by {|post| post[:created_at] }.reverse
   end
   
-  def new
-    @title = "Write new post"
-    user = current_user
-    @post = user.posts.new
-  end
+#  def new
+#    @title = "Write new post"
+#    user = current_user
+#    @post = user.posts.new
+#  end
   
   def create
     user = current_user

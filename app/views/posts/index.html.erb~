@@ -15,7 +15,7 @@
     <h5><%= time_ago_in_words(post.created_at) %> ago</h5>
     <p><%= post.content %></p>
     <p>lifespan: <%= post.lifespan %></p>
-    <p>self destructing in: <%= distance_of_time_in_words(Time.now,post.destruct_at) %></p>
+    <p>self destructing in: <%= distance_of_time_in_words(Time.now, post.destruct_at, include_seconds: true) %></p>
     <p>post score: <%= post.score %></p>
   </div>
   <% if column == 5 %>

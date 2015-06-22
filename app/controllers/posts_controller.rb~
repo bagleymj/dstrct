@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   def index
+    user = current_user
+    @post = user.posts.new
     @title = "Posts"
     users = User.all
     posts = []
