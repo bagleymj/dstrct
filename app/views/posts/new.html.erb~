@@ -8,6 +8,10 @@
     <%= f.text_area :content %>
   </div>
   <div>
+    <%= f.label :lifespan %><br/>
+    <%= f.text_field :lifespan %>
+  </div>
+  <div>
     <%= f.submit %>
   </div>
 <% end %>

@@ -4,8 +4,9 @@ class PostsController < ApplicationController
     users = User.all
     posts = []
     users.each do |user|
-      if !user.posts.empty?
-        posts << user.posts.last
+      post_query = user.posts.where('destruct_at > ?', Time.now)
+      if !post_query.empty?
+        posts << post_query.last
       end
     end
     @posts = posts.sort_by {|post| post[:created_at] }.reverse
