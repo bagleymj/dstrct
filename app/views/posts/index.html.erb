@@ -25,12 +25,8 @@
       (<%= post.user.score %>)
       <%= link_to "+", vote_up_path(post.id), method: :put if post.user != current_user %>
     </h4>
-    <h5><%= time_ago_in_words(post.created_at) %> ago</h5>
+    <h5><%= get_countdown(post) %> remaining</h5>
     <p><%= post.content %></p>
-    <p>lifespan: <%= post.lifespan %></p>
-    <% humanize(post.destruct_at - Time.now) %>
-    <p>self destructing in: <%= distance_of_time_in_words(Time.now, post.destruct_at, include_seconds: true) %></p>
-    <p>post score: <%= post.score %></p>
   </div>
   <% if column == 5 %>
     </div>
