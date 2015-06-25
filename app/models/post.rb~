@@ -4,13 +4,20 @@ class Post < ActiveRecord::Base
 
   def default_values
     self.score ||= 0
-    default_lifespan = 3600
-    self.lifespan = default_lifespan
-    self.destruct_at = default_lifespan.seconds.from_now
+    if self.lifespan = nil
+      new_record?
+    end
+    self.lifespan ||= 3600
+    self.destruct_at = default_lifespan.seconds.from_now if new_record?
   end
 
   def reset_score
     self.score = 0
     self.save
   end
+
+  def is_not_destructed?
+    Time.now < self.destruct_at
+  end
+
 end

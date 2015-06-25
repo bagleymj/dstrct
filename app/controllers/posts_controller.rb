@@ -22,8 +22,12 @@ class PostsController < ApplicationController
   
   def create
     user = current_user
+    last_post = user.posts.last
+    if last_post.is_not_destructed?
+      last_post.lifespan = (last_post.destruct_at - (last_post.destruct_at - Time.now)).to_i
+      last_post.save
+    end
     @post =user.posts.new(post_params)
-    @post.destruct_at = @post.lifespan.seconds.from_now
     if @post.save
       flash[:success] = "Post submitted"
       user.post_count = user.post_count + 1

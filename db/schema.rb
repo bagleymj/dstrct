@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150618192634) do
+ActiveRecord::Schema.define(version: 20150625173508) do
 
   create_table "posts", force: :cascade do |t|
     t.datetime "created_at",                                  null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20150618192634) do
     t.integer  "user_id"
     t.integer  "score"
     t.datetime "destruct_at", default: '1970-01-01 00:00:00', null: false
-    t.integer  "lifespan",    default: 0,                     null: false
+    t.integer  "lifespan"
   end
 
   create_table "users", force: :cascade do |t|
