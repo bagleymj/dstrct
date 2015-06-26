@@ -25,7 +25,7 @@
       (<%= post.user.score %>)
       <%= link_to "+", vote_up_path(post.id), method: :put if post.user != current_user %>
     </h4>
-    <h5><%= get_countdown(post) %> remaining</h5>
+    <h5 class="countdown"><%= get_countdown(post) %> remaining</h5>
     <p><%= post.content %></p>
   </div>
   <% if column == 5 %>

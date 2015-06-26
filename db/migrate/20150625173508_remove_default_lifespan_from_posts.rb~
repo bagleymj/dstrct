@@ -1,0 +1,5 @@
+class RemoveDefaultLifespanFromPosts < ActiveRecord::Migration
+  def change
+    change_column :posts, :lifespan, null: true, default: nil
+  end
+end
