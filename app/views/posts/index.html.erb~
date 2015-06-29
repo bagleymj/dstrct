@@ -28,7 +28,7 @@
     <h5 class="countdown">
       <%= javascript_tag do %>
         var count = 1000;
-        count;
+        text(count);
       <% end %>
     </h5>
 
