@@ -17,6 +17,9 @@ Rails.application.routes.draw do
      resources :posts
      resources :users
 
+     get 'signup' => 'users#new'
+     post 'signup' => 'usesr#create'
+
      get 'login' => 'sessions#new'
      post 'login' => 'sessions#create'
      delete 'logout' => 'sessions#destroy'
